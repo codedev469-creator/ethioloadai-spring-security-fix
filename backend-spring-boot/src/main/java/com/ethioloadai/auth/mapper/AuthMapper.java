@@ -5,10 +5,12 @@ import com.ethioloadai.auth.dto.RegisterRequest;
 import com.ethioloadai.auth.dto.UpdateProfileRequest;
 import com.ethioloadai.auth.dto.UserResponse;
 import com.ethioloadai.user.entity.User;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring")
 public interface AuthMapper {
@@ -28,6 +30,7 @@ public interface AuthMapper {
 
     UserResponse toResponse(User user);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "fullName", source = "fullName")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "password", ignore = true)
